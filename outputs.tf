@@ -6,3 +6,10 @@ output "vpc" {
     private_subnet_ids = aws_subnet.private_subnets[*].id
   }
 }
+
+output "lambda" {
+  description = "Lambda related IDs"
+  value = {
+    security_group_id = aws_security_group.lambda_outbound_traffic_sg.id
+  }
+}
