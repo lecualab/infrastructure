@@ -33,6 +33,49 @@ variable "subnet_count" {
   }
 }
 
+variable "rds_settings" {
+  description = "The settings for the RDS resources"
+  type = map(object({
+    identifier          = string
+    engine              = string
+    engine_version      = string
+    instance_class      = string
+    db_name             = string
+    username            = string
+    deletion_protection = bool
+  }))
+  default = {
+    landing_page = {
+      identifier          = "landing-page"
+      engine              = "postgres"
+      engine_version      = "17.4"
+      instance_class      = "db.t4g.micro"
+      db_name             = "landing_page"
+      username            = "landing_page"
+      deletion_protection = false
+    }
+  }
+}
+
+variable "ec2_settings" {
+  description = "The settings for the EC2 instances"
+  type = map(object({
+    instance_type = string
+  }))
+  default = {
+    bastion = {
+      instance_type = "t2.micro"
+    }
+  }
+}
+
+variable "key_pair_settings" {
+  description = "The settings for the key pairs"
+  type = map(object({
+    public_key_path = string
+  }))
+}
+
 variable "public_subnet_cidr_blocks" {
   description = "The CIDR block for the public subnet"
   type        = list(string)
