@@ -76,6 +76,15 @@ variable "key_pair_settings" {
   }))
 }
 
+variable "ses_settings" {
+  description = "The settings for the SES resources"
+  sensitive   = true
+  type = object({
+    domain_name    = string
+    email_identity = string
+  })
+}
+
 variable "public_subnet_cidr_blocks" {
   description = "The CIDR block for the public subnet"
   type        = list(string)
